@@ -6,10 +6,29 @@ import { MdClose } from "react-icons/md";
 import { usePathname } from 'next/navigation'
 
 export const Navbar = () => {
+    const env = process.env.NODE_ENV;
+    const [menuItemsFinal, setMenuItemsFinal] = useState([...menuItems]);
+    const pathname = usePathname();
+    const [active, setActive] = useState(pathname);
+
+    console.log(window.location.origin);
+    useEffect(() => {
+        if (env === 'development') {
+            const updatedMenuItems = menuItems.map(item => {
+                return {
+                    ...item,
+                    link: item.link.replace('index.html', '')
+                };
+            });
+            setMenuItemsFinal(updatedMenuItems);
+        }
+    }, [env]);
+
+    useEffect(() => {
+        setActive(pathname);
+    }, [pathname]);
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const pathname = usePathname();
-    console.log(pathname);
 
     const handleDrawerToggle = () => {
         setIsDrawerOpen(!isDrawerOpen);
@@ -18,8 +37,6 @@ export const Navbar = () => {
     const handleCloseDrawer = () => {
         setIsDrawerOpen(false);
     };
-
-    const [active, setActive] = useState(pathname ? menuItems.find(item => item.link === pathname)?.name : 'Home');
 
     return (
         <nav className="bg-transparent p-5 flex-col">
@@ -39,9 +56,9 @@ export const Navbar = () => {
 
                 <div className="hidden lg:block md:hidden w-full text-right md:w-auto">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg bg-transparent md:flex-row md:space-x-1 rtl:space-x-reverse md:mt-0 md:border-0 gap-4 transition-all duration-300 ease-in-out">
-                        {menuItems.map(item => (
+                        {menuItemsFinal.map(item => (
                             <li key={item.id}>
-                                <a onClick={() => setActive(item.name)} href={item.link} className="block text-lg py-2 px-2 group text-gray-200 transition-all duration-300 ease-in-out">
+                                <a onClick={() => setActive(item.link)} href={item.link} className="block text-lg py-2 px-2 group text-gray-200 transition-all duration-300 ease-in-out">
                                     <span className={`bg-left-bottom bg-gradient-to-r from-green-400 to-green-400 ${active === item.link ? 'bg-[length:100%_2px]' : 'bg-[length:0%_2px]'} bg-no-repeat transition-all duration-500 group-hover:bg-[length:100%_2px] ease-out`}>
                                         {item.name}
                                     </span>
@@ -58,7 +75,7 @@ export const Navbar = () => {
                         type="button"
                         onClick={handleCloseDrawer}
                         aria-controls="drawer-navigation"
-                        className="text-white bg-transparent hover:bg-gray-800 hover:text-white  rounded-lg text-sm w-10 h-10 top-2.5 end-2.5 inline-flex items-center justify-center transition-all duration-300 ease-in-out"
+                        className="text-white bg-transparent hover:bg-gray-800 hover:text-white rounded-lg text-sm w-10 h-10 top-2.5 end-2.5 inline-flex items-center justify-center transition-all duration-300 ease-in-out"
                     >
                         <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -66,9 +83,9 @@ export const Navbar = () => {
                         <span className="sr-only">Close menu</span>
                     </button>
                     <ul className="font-medium flex flex-col pt-4 rounded-lg bg-transparent rtl:space-x-reverse gap-4">
-                        {menuItems.map(item => (
+                        {menuItemsFinal.map(item => (
                             <li key={item.id} className="text-white">
-                                <a onClick={() => setActive(item.name)} href={item.link} className="block text-lg py-2 px-2 group text-white transition-all duration-300 ease-in-out">
+                                <a onClick={() => setActive(item.link)} href={item.link} className="block text-lg py-2 px-2 group text-white transition-all duration-300 ease-in-out">
                                     <span className={`bg-left-bottom bg-gradient-to-r from-green-400 to-green-400 ${active === item.link ? 'bg-[length:100%_2px]' : 'bg-[length:0%_2px]'} bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_2px]`}>
                                         {item.name}
                                     </span>

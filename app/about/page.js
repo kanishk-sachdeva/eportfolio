@@ -16,7 +16,7 @@ const About = () => {
 
       <div className='flex flex-col md:flex-row lg:flex-row mt-5'>
         <div className='lg:w-1/3 w-full p-3'>
-          <Image src='/images/mypic.jpeg' alt='Kanishk Sachdeva' width={350} layout='resposive' height={350} />
+          <Image src='/images/mypic.jpeg' alt='Kanishk Sachdeva' width={350} height={350} />
         </div>
         <div className='lg:w-2/3 mx-[18px]'>
           <h3 className='text-2xl font-semibold'>Kanishk Sachdeva</h3>
