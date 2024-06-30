@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: eportfolio
+  name: eportfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eportfolio
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: eportfolio
+    spec:
+      containers:
+      - image: kanu00047/kanishksachdevaportfolio:v2
+        name: kanishksachdevaportfolio
+        resources: {}
+status: {}
