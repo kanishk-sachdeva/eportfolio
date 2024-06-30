@@ -45,5 +45,26 @@ pipeline {
                 }
             }
         }
+
+        stage('Upload Static HTML files to AWS S3') {
+            agent {
+                docker {
+                    image 'amazon/aws-cli'
+                    args '-u root'
+                }
+            }
+            steps {
+                script {
+                    sh 'cp -r out/* .'
+                    
+                    withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
+
+                        sh 'aws sts get-caller-identity'
+                        sh 'aws s3 cp --recursive --acl public-read out/* s3://kanishksachdeva.com'
+                    }
+                    
+                }
+            }
+        }
     }
 }
