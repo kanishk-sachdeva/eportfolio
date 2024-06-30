@@ -60,7 +60,6 @@ pipeline {
                     script {
                         sh 'aws sts get-caller-identity'
                         sh 'aws s3 sync out s3://www.kanishksachdeva.com'
-                        sh 'aws s3 sync out s3://kanishksachdeva.com'
                     }
                 }
                 
