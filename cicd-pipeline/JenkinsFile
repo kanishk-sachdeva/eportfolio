@@ -58,9 +58,9 @@ pipeline {
             steps {
                 withAWS(credentials: "${AWS_CREDENTIALS_ID}") {
                     script {
-                        sh 'cp -r out/* .' 
+                        sh 'cd out'
                         sh 'aws sts get-caller-identity'
-                        sh 'aws s3 cp --recursive --acl public-read . s3://kanishksachdeva.com'
+                        sh 'aws s3 cp --recursive . s3://kanishksachdeva.com'
                     }
                 }
                 
