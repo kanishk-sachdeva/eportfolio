@@ -11,7 +11,6 @@ export const Navbar = () => {
     const pathname = usePathname();
     const [active, setActive] = useState(pathname);
 
-    console.log(window.location.origin);
     useEffect(() => {
         if (env === 'development') {
             const updatedMenuItems = menuItems.map(item => {
