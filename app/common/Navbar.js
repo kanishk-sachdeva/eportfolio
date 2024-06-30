@@ -42,7 +42,7 @@ export const Navbar = () => {
                         {menuItems.map(item => (
                             <li key={item.id}>
                                 <a onClick={() => setActive(item.name)} href={item.link} className="block text-lg py-2 px-2 group text-gray-200 transition-all duration-300 ease-in-out">
-                                    <span className={`bg-left-bottom bg-gradient-to-r from-green-400 to-green-400 ${active === item.name ? 'bg-[length:100%_2px]' : 'bg-[length:0%_2px]'} bg-no-repeat transition-all duration-500 group-hover:bg-[length:100%_2px] ease-out`}>
+                                    <span className={`bg-left-bottom bg-gradient-to-r from-green-400 to-green-400 ${active === item.link ? 'bg-[length:100%_2px]' : 'bg-[length:0%_2px]'} bg-no-repeat transition-all duration-500 group-hover:bg-[length:100%_2px] ease-out`}>
                                         {item.name}
                                     </span>
                                 </a>
@@ -69,7 +69,7 @@ export const Navbar = () => {
                         {menuItems.map(item => (
                             <li key={item.id} className="text-white">
                                 <a onClick={() => setActive(item.name)} href={item.link} className="block text-lg py-2 px-2 group text-white transition-all duration-300 ease-in-out">
-                                    <span className={`bg-left-bottom bg-gradient-to-r from-green-400 to-green-400 ${active === item.name ? 'bg-[length:100%_2px]' : 'bg-[length:0%_2px]'} bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_2px]`}>
+                                    <span className={`bg-left-bottom bg-gradient-to-r from-green-400 to-green-400 ${active === item.link ? 'bg-[length:100%_2px]' : 'bg-[length:0%_2px]'} bg-no-repeat transition-all duration-500 ease-out group-hover:bg-[length:100%_2px]`}>
                                         {item.name}
                                     </span>
                                 </a>
