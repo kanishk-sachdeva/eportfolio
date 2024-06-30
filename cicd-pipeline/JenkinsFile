@@ -57,11 +57,8 @@ pipeline {
                 script {
                     sh 'cp -r out/* .'
                     
-                    AWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-
-                        sh 'aws sts get-caller-identity'
-                        sh 'aws s3 cp --recursive --acl public-read out/* s3://kanishksachdeva.com'
-                    }
+                    sh 'aws sts get-caller-identity'
+                    sh 'aws s3 cp --recursive --acl public-read out/* s3://kanishksachdeva.com'
                     
                 }
             }
