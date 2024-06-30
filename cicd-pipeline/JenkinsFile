@@ -3,6 +3,7 @@ pipeline {
     environment {
         DOCKER_HUB_REPO = 'kanu00047/kanishksachdevaportfolio'
         DOCKER_HUB_CREDENTIALS = 'DOCKER_HUB_CREDENTIALS'
+        AWS_CREDENTIALS_ID = 'AWS_CREDENTIALS'
     }
     stages {
         stage('Build React App for Production Static Files') {
@@ -34,6 +35,7 @@ pipeline {
                 }
             }
             steps {
+                
                 script {
                     // Copy build artifacts into Docker build context
                     sh 'cp -r out/* .'
@@ -54,11 +56,14 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    sh 'aws sts get-caller-identity'
-                    sh 'aws s3 cp --recursive --acl public-read out/* s3://kanishksachdeva.com'
-                    
+                withAWS(credentials: "${AWS_CREDENTIALS_ID}") {
+                    script {
+                        sh 'aws s3 ls'    
+                        sh 'aws sts get-caller-identity'
+                        sh 'aws s3 cp --recursive --acl public-read out/* s3://kanishksachdeva.com'
+                    }
                 }
+                
             }
         }
     }
