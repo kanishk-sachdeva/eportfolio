@@ -55,8 +55,6 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'cp -r out/* .'
-                    
                     sh 'aws sts get-caller-identity'
                     sh 'aws s3 cp --recursive --acl public-read out/* s3://kanishksachdeva.com'
                     
