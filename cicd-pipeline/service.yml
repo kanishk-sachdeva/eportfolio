@@ -12,7 +12,7 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: eportfolio-svc
+    app: eportfolio
   type: NodePort
 status:
   loadBalancer: {}
