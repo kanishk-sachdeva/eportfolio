@@ -1,6 +1,6 @@
 FROM nginx
 
-COPY build/ /nginx/html
+COPY out/ /nginx/html
 
 COPY /cicd-pipeline/nginx.conf /etc/nginx/conf.d/default.conf
 
